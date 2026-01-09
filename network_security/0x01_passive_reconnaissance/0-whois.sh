@@ -1,2 +1,2 @@
 #!/bin/bash
-whois "$1" | awk -F': ' 'BEGIN{split("Registrant Admin Tech",p);split("Name Organization Street City State/Province Postal Code Country Phone Phone Ext Fax Fax Ext Email",f)}{k=$1;gsub(/^[ \t]+|[ \t]+$/,"",k);v=$0;sub(/^[^:]*:[ \t]*/,"",v);gsub(/[ \t]+$/,"",v);if(k!="")a[k]=v}END{for(i=1;i<=3;i++)for(j=1;j<=12;j++){k=p[i]" "f[j];v=a[k];if(v=="")v=" ";if(f[j]=="Street"&&v!=" ")v=v" ";printf "%s%s,%s%s",k,(f[j]~/Ext/?":":""),v,(i==3&&j==12?"":"\n")}}' > "$1.csv"
+whois $1 | awk -F': +' '/^(Registrant|Admin|Tech) (Name|Organization|Street|City|State\/Province|Postal Code|Country|Phone|Fax|Email)/ {k=$1; v=$2; if (k ~ /Street/) v=v" "; if (k ~ /Ext/) k=k":"; printf "%s,%s%s", k, v, (NR == 500 ? "" : "\n")}' | sed '/^$/d' | printf "%s" "$(cat)" > $1.csv
