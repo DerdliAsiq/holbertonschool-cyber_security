@@ -1,1 +1,1 @@
-udp.dstport == 40125 and frame.len == 42
+udp.dstport == 40125 and ip.proto == 17
