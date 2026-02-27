@@ -1,2 +1,2 @@
 #!/bin/bash
-sestatus 2>/dev/null | grep "SELinux status:" || echo "SELinux status: disabled"
+/usr/sbin/sestatus | grep "SELinux status:"
