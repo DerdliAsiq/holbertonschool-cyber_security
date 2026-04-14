@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -c "COMMAND=/sbin/iptables" "${1:-auth.log}"
+grep "COMMAND=/sbin/iptables" "${1:-auth.log}" | grep -E " -A | -I " | wc -l

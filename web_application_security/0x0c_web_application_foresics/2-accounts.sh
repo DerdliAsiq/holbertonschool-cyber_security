@@ -1,2 +1,2 @@
 #!/bin/bash
-awk '/Failed/ {failed[$9]++} /Accepted/ {if (failed[$9] > 0) print $9}' "${1:-auth.log}" | sort -u | head -n 1
+grep "Failed" "${1:-auth.log}" | sed 's/invalid user //' | awk '{for(i=1;i<=NF;i++) if($i=="from") print $(i-1)}' | sort | uniq -c | sort -rn | head -n 1 | awk '{print $2}'
