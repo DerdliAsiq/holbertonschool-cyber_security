@@ -19,7 +19,6 @@ opt_parser = OptionParser.new do |opts|
     options[:remove] = index.to_i
   end
 
-  # Checker'ın çıktı içerisinde mutlaka görmek istediği help satırı
   opts.on("-h", "--help", "Show help") do
     puts opts
     exit
@@ -41,8 +40,9 @@ if options[:add]
 
 elsif options[:list]
   if File.exist?(tasks_file) && !File.zero?(tasks_file)
-    File.open(tasks_file, 'r').each_line.with_index do |line, idx|
-      puts "#{idx + 1}. #{line.strip}"
+    puts "Tasks:"
+    File.open(tasks_file, 'r').each_line do |line|
+      puts line.strip
     end
   else
     puts "No tasks found."
