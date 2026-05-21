@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'net/http'
 require 'uri'
+require 'json'
 
 def get_request(url)
   uri = URI.parse(url)
@@ -8,5 +9,13 @@ def get_request(url)
 
   puts "Response status: #{response.code} #{response.message}"
   puts "Response body:"
-  print "#{response.body.to_s.strip}\n"
+  
+  begin
+    # Gelen yanıtı JSON olarak parse edip "Pretty JSON" (alt alta) formatında basıyoruz
+    parsed_body = JSON.parse(response.body)
+    puts JSON.pretty_generate(parsed_body)
+  rescue JSON::ParserError
+    # Eğer dönen veri geçerli bir JSON değilse olduğu gibi bas
+    puts response.body
+  end
 end
