@@ -41,12 +41,9 @@ if options[:add]
 elsif options[:list]
   if File.exist?(tasks_file) && !File.zero?(tasks_file)
     puts "Tasks:"
-    File.open(tasks_file, 'r').each_line do |line|
-      puts line.strip
+    File.open(tasks_file, 'r').each_line.with_index do |line, idx|
+      puts "#{idx + 1}. #{line.strip}"
     end
-    # Eksik olan tam 2 adet newline (\n\n) karakterini ekleyerek 25 byte'a tamamlıyoruz
-    puts
-    puts
   else
     puts "No tasks found."
   end
