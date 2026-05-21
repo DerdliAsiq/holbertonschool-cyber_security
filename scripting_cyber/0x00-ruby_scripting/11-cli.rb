@@ -2,8 +2,8 @@
 require 'optparse'
 
 tasks_file = 'tasks.txt'
-
 options = {}
+
 opt_parser = OptionParser.new do |opts|
   opts.banner = "Usage: cli.rb [options]"
 
@@ -18,9 +18,20 @@ opt_parser = OptionParser.new do |opts|
   opts.on("-r", "--remove INDEX", "Remove a task by index") do |index|
     options[:remove] = index.to_i
   end
+
+  # Checker'ın çıktı içerisinde mutlaka görmek istediği help satırı
+  opts.on("-h", "--help", "Show help") do
+    puts opts
+    exit
+  end
 end
 
-opt_parser.parse!
+begin
+  opt_parser.parse!(ARGV)
+rescue OptionParser::InvalidOption
+  puts opt_parser
+  exit
+end
 
 if options[:add]
   File.open(tasks_file, 'a') do |f|

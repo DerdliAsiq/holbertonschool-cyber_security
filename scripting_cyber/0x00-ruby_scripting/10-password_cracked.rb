@@ -7,16 +7,16 @@ if ARGV.length != 2
 end
 
 target_hash = ARGV[0]
-dictionary_path = ARGV[1]
+dictionary_file = ARGV[1]
 
-unless File.exist?(dictionary_path)
+unless File.exist?(dictionary_file)
   puts "Dictionary file not found."
   exit
 end
 
 found = false
 
-File.open(dictionary_path, 'r').each_line do |line|
+File.open(dictionary_file, 'r').each_line do |line|
   word = line.strip
   if Digest::SHA256.hexdigest(word) == target_hash
     puts "Password found: #{word}"
