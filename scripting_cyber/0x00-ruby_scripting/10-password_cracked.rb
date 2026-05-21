@@ -6,7 +6,7 @@ if ARGV.length != 2
   exit
 end
 
-target_hash = ARGV[0]
+hashed_password = ARGV[0]
 dictionary_file = ARGV[1]
 
 unless File.exist?(dictionary_file)
@@ -18,7 +18,7 @@ found = false
 
 File.open(dictionary_file, 'r').each_line do |line|
   word = line.strip
-  if Digest::SHA256.hexdigest(word) == target_hash
+  if Digest::SHA256.hexdigest(word) == hashed_password
     puts "Password found: #{word}"
     found = true
     break
