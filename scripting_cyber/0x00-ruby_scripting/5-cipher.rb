@@ -13,17 +13,15 @@ class CaesarCipher
     cipher(message, -@shift)
   end
 
-  private
-
-  def cipher(message, shift_value)
+  def cipher(message, shift)
     result = ""
     message.each_char do |char|
       if char =~ /[a-z]/
         base = 'a'.ord
-        result += ((char.ord - base + shift_value) % 26 + base).chr
+        result += ((char.ord - base + shift) % 26 + base).chr
       elsif char =~ /[A-Z]/
         base = 'A'.ord
-        result += ((char.ord - base + shift_value) % 26 + base).chr
+        result += ((char.ord - base + shift) % 26 + base).chr
       else
         result += char
       end
